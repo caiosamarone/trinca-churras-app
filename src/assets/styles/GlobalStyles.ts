@@ -1,6 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
+ * {
+		@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
+    font-family: Raleway !important;
+    }
+
 	:root {
 		font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
 		font-size: 16px;
