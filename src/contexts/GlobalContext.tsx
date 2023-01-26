@@ -41,7 +41,7 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
       {
         id: '1',
         date: '12/02',
-        totalAmount: '023',
+        totalAmount: '220',
         description: 'Churras da galera',
         title: 'Churras 2',
         peopleList: [
@@ -68,7 +68,7 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
       {
         id: '2',
         date: '12/02',
-        totalAmount: '023',
+        totalAmount: '900',
         description: 'Churras da galera',
         title: 'Churras caio',
         peopleList: [],
@@ -76,7 +76,7 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
       {
         id: '3',
         date: '12/02',
-        totalAmount: '023',
+        totalAmount: '189',
         description: 'Churras da galera',
         title: 'Churras sem compromisso',
         peopleList: [],
