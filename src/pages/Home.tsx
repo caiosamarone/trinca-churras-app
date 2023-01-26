@@ -1,17 +1,48 @@
 import { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { Button as AntButton } from 'antd';
-import { IBarbecue, useGlobalContext } from 'contexts/GlobalContext';
+import styled from 'styled-components';
+import { Form as AntForm, Input, DatePicker } from 'antd';
+import { useGlobalContext } from 'contexts/GlobalContext';
 import Header from 'modules/Header';
 import BarbecueCard from 'components/BarbecueCard';
 import AddBarbecueCard from 'components/AddBarbecueCard';
 import { TrincaLogo } from 'assets/icons';
-import BarbecueDetails from 'modules/BarbecueDetails';
+import BarbecueDetails from 'components/BarbecueDetails';
+import { DefaultModal } from 'components/Modal';
+import PrimaryTitle from 'components/PrimaryTitle';
+import dayjs from 'dayjs';
 
 const Home: React.FC = () => {
-  const { barbecue } = useGlobalContext();
+  const { barbecue, setBarbecue } = useGlobalContext();
   const [selectedBarbecue, setSelectedBarbecue] = useState<any>({});
-  console.log(selectedBarbecue);
+  const [addBarbecueModalVisible, setAddBarbecueModalVisible] = useState(false);
+  const [form] = AntForm.useForm();
+
+  const doSendForm = async () => {
+    let values: any = null;
+
+    values = await form.validateFields();
+
+    const randomId = String(Math.floor(Math.random() * 200));
+    const formattedDate = dayjs(values.date).format('DD/MM/YY');
+    setBarbecue([
+      ...barbecue,
+      {
+        title: values.title,
+        date: formattedDate,
+        observation: values.observation,
+        totalAmount: '0',
+        description: values.description,
+        id: randomId,
+        peopleList: [],
+      },
+    ]);
+    onCloseModal();
+    //TODO exibir toast de sucesso e colocar um try
+  };
+  const onCloseModal = () => {
+    form.resetFields();
+    setAddBarbecueModalVisible(false);
+  };
   return (
     <Wrapper>
       <Header />
@@ -23,14 +54,52 @@ const Home: React.FC = () => {
             {barbecue.map(b => (
               <BarbecueCard key={b.id} barbecue={b} selectBarbecue={setSelectedBarbecue} />
             ))}
-            <AddBarbecueCard />
+            <AddBarbecueCard handleClick={() => setAddBarbecueModalVisible(true)} />
           </CardsWrapper>
         )}
-        {/* TODO -  criar um container para cada os cards */}
       </ContentWrapper>
       <LogoWrapper>
         <img src={TrincaLogo} style={{ marginTop: '5rem' }} />
       </LogoWrapper>
+      <DefaultModal
+        open={addBarbecueModalVisible}
+        formName="barbecueForm"
+        destroyOnClose
+        onOk={doSendForm}
+        onCancel={onCloseModal}
+      >
+        <PrimaryTitle text="Adicionar churrasco" />
+        <AntForm
+          name="barbecueForm"
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 32 }}
+          style={{ minWidth: 280, marginTop: 24 }}
+          form={form}
+          autoComplete="off"
+        >
+          <AntForm.Item name="title" rules={[{ required: true, message: 'Insira um título' }]}>
+            <Input placeholder="Título" />
+          </AntForm.Item>
+          <AntForm.Item name="date" rules={[{ required: true, message: 'Insira uma data' }]}>
+            <DatePicker
+              disabledDate={date => date && date < dayjs().endOf('d').subtract(1, 'd')}
+              placeholder="Data do churrasco"
+              style={{ width: '100%' }}
+              format="DD/MM/YYYY"
+            />
+          </AntForm.Item>
+          <AntForm.Item
+            name="description"
+            rules={[{ required: true, message: 'Insira uma descrição para o evento' }]}
+          >
+            <Input placeholder="Descrição" />
+          </AntForm.Item>
+
+          <AntForm.Item name="observation">
+            <Input placeholder="Observações adicionais" />
+          </AntForm.Item>
+        </AntForm>
+      </DefaultModal>
     </Wrapper>
   );
 };

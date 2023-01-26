@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import { IconBBQ, IconMoney, IconPeople } from 'assets/icons';
 const { Paragraph } = Typography;
 
-const AddBarbecueCard: React.FC = () => {
+interface Props {
+  handleClick: () => void;
+}
+
+const AddBarbecueCard: React.FC<Props> = ({ handleClick }) => {
   return (
     <Card
       style={{
@@ -14,7 +18,7 @@ const AddBarbecueCard: React.FC = () => {
         background: '#F1F1F1',
       }}
       hoverable
-      onClick={() => console.log('clicked')}
+      onClick={handleClick}
       bodyStyle={{
         height: '100%',
         padding: '18px',

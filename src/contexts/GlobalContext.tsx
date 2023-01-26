@@ -1,6 +1,11 @@
+import { ConfigProvider } from 'antd';
 import React, { useState, useContext, useEffect } from 'react';
+import ptBR from 'antd/lib/locale/pt_BR';
 import { createContext } from 'react';
+import dayjs from 'dayjs';
+import 'dayjs/locale/pt-br';
 
+dayjs.locale('pt-br');
 export interface IParticipant {
   id: string;
   name: string;
@@ -81,13 +86,25 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
 
   //todo => funcao de deletar participante
   //todo => funcao que atualiza lista de participantes de um churrasco, e atualiza o total amount
+  //todo => funcao que checa se o usuario ja pagou um churrasco
+  const handleAddParticipant = (data: IParticipant) => {};
+
+  const handleCreateBarbecue = (data: IBarbecue) => {};
+
+  const handleDeleteParticipant = (participant: IParticipant) => {};
+
+  const checkParticipantPaid = (participan: IParticipant) => {};
 
   const context = {
     barbecue,
     setBarbecue,
   };
 
-  return <GlobalContext.Provider value={context}>{children}</GlobalContext.Provider>;
+  return (
+    <ConfigProvider locale={ptBR}>
+      <GlobalContext.Provider value={context}>{children}</GlobalContext.Provider>
+    </ConfigProvider>
+  );
 };
 
 export const useGlobalContext = (): IGlobalProps => {
