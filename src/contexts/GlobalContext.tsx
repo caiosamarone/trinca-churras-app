@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { createContext } from 'react';
 
-interface IParticipant {
+export interface IParticipant {
   id: string;
   name: string;
   contributionValue: string;
@@ -38,7 +38,23 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
         totalAmount: '023',
         description: 'Churras da galera',
         title: 'Churras 2',
-        peopleList: [],
+        peopleList: [
+          {
+            id: '1',
+            name: 'caio',
+            contributionValue: '40',
+          },
+          {
+            id: '2',
+            name: 'pedro',
+            contributionValue: '20',
+          },
+          {
+            id: '3',
+            name: 'Liandra',
+            contributionValue: '10',
+          },
+        ],
       },
       {
         id: '2',

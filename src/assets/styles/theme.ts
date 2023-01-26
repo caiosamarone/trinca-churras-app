@@ -57,6 +57,7 @@ const theme = {
     },
     background: {
       main: '#FAFAFA',
+      secondary: '#F1F1F1',
       paper: colors.white,
       linearGradient: {
         blue: 'linear-gradient(251.63deg, #0066B3 0%, #383096 61.98%, #812990 100%)',
