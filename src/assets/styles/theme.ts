@@ -56,7 +56,7 @@ const theme = {
       constrastText: colors.black[87],
     },
     background: {
-      main: '#fbfbfb',
+      main: '#FAFAFA',
       paper: colors.white,
       linearGradient: {
         blue: 'linear-gradient(251.63deg, #0066B3 0%, #383096 61.98%, #812990 100%)',

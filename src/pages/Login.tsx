@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const onSubmit = (values: any) => {
-    navigate('/home');
+    navigate('/churrascos');
   };
   return (
     <Wrapper>
