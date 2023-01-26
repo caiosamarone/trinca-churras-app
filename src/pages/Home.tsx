@@ -68,12 +68,12 @@ const Home: React.FC = () => {
         onOk={doSendForm}
         onCancel={onCloseModal}
       >
-        <PrimaryTitle text="Adicionar churrasco" />
-        <AntForm
+        <PrimaryTitle text="Agendar churrasco" />
+        <Form
           name="barbecueForm"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 32 }}
-          style={{ minWidth: 280, marginTop: 24 }}
+          // style={{ minWidth: 280, marginTop: 24 }}
           form={form}
           autoComplete="off"
         >
@@ -98,7 +98,7 @@ const Home: React.FC = () => {
           <AntForm.Item name="observation">
             <Input placeholder="Observações adicionais" />
           </AntForm.Item>
-        </AntForm>
+        </Form>
       </DefaultModal>
     </Wrapper>
   );
@@ -133,6 +133,14 @@ const LogoWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+`;
+
+const Form = styled(AntForm)`
+  min-width: 280px;
+  margin-top: 24px;
+  @media (max-width: 768px) {
+    min-width: unset;
+  }
 `;
 
 export default Home;

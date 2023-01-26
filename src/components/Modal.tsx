@@ -46,6 +46,7 @@ export const Modal = styled(AntModal)`
   .ant-modal-content {
     border-radius: 0.5rem;
     overflow: hidden;
+    padding: 10px;
   }
 
   .ant-modal-header {
