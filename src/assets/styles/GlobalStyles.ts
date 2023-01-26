@@ -22,7 +22,9 @@ const GlobalStyles = createGlobalStyle`
 		-moz-osx-font-smoothing: grayscale;
 		-webkit-text-size-adjust: 100%;
 	}
-
+	::selection {
+  background: #FFD836;
+}
 	a {
 		font-weight: 500;
 		color: #646cff;
