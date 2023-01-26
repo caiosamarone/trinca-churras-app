@@ -23,7 +23,7 @@ const BarbecueCard: React.FC<BarbecueCardProps> = ({ barbecue, selectBarbecue })
       onClick={() => selectBarbecue(barbecue)}
     >
       <PrimaryTitle text={barbecue.date} />
-      <SecondaryTitle text={barbecue.title} />
+      <SecondaryTitle text={barbecue.title} wrapText />
       <Footer>
         <ParticipantsInfo value={barbecue?.peopleList?.length} />
         <MoneyInfo value={barbecue.totalAmount} />

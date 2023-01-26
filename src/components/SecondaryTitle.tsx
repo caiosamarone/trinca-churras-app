@@ -1,5 +1,5 @@
 import { Typography } from 'antd';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 const { Paragraph } = Typography;
 
 interface Props {
@@ -9,21 +9,34 @@ interface Props {
   personName?: boolean;
 }
 
-const SecondaryTitle: React.FC<Props> = ({ text, alreadyPaid = true, personName = false }) => {
+const SecondaryTitle: React.FC<Props> = ({
+  text,
+  alreadyPaid = true,
+  personName = false,
+  wrapText = false,
+}) => {
   return (
-    <Title style={{ textDecoration: alreadyPaid && personName ? 'line-through' : 'unset' }}>
+    <Title
+      wrapText={wrapText}
+      style={{ textDecoration: alreadyPaid && personName ? 'line-through' : 'unset' }}
+    >
       {text}
     </Title>
   );
 };
 
-const Title = styled(Paragraph)`
-  font-size: 21px;
-  margin: 0px !important;
+const wrapPoints = css`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 240px;
+`;
+
+const Title = styled(Paragraph)<{ wrapText: boolean }>`
+  font-size: 21px;
+  /* color: ${props => (props.wrapText ? 'red' : 'blue')}; */
+  margin: 0px !important;
+  ${props => (props.wrapText ? wrapPoints : null)}
 `;
 
 export default SecondaryTitle;
