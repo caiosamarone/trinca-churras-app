@@ -5,6 +5,7 @@ export interface IParticipant {
   id: string;
   name: string;
   contributionValue: string;
+  alreadyPaid: boolean;
 }
 
 export interface IBarbecue {
@@ -43,16 +44,19 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
             id: '1',
             name: 'caio',
             contributionValue: '40',
+            alreadyPaid: true,
           },
           {
             id: '2',
             name: 'pedro',
             contributionValue: '20',
+            alreadyPaid: false,
           },
           {
             id: '3',
             name: 'Liandra',
             contributionValue: '10',
+            alreadyPaid: false,
           },
         ],
       },

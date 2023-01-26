@@ -37,5 +37,5 @@ export default BarbecueCard;
 const Footer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin-top: 2rem;
 `;

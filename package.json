@@ -10,13 +10,14 @@
     "clean": "npx rimraf dist"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.0.1",
     "@tanstack/react-query": "4.6.0",
     "antd": "^5.1.6",
     "axios": "0.27.2",
+    "phosphor-react": "^1.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "^6.7.0",
-    "recoil": "0.7.5",
     "styled-components": "5.3.5"
   },
   "devDependencies": {

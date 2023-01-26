@@ -22,6 +22,7 @@ const ItemsWrapper = styled.div`
 
 const AmountParticipants = styled.p`
   font-size: 21px;
+  margin: 0px;
 `;
 
 export default ParticipantsInfo;

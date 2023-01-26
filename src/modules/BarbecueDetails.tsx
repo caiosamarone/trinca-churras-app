@@ -17,7 +17,7 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({ barbecue, onClose }) 
       style={{ width: '100%', borderRadius: '2px', height: '100%', marginTop: '-40px' }}
       bodyStyle={{ height: '100%', padding: '18px' }}
     >
-      <Button onClick={onClose}>Voltar</Button>
+      <BackButton onClick={onClose}>Voltar</BackButton>
       <WrapperHeader>
         <PrimaryTitle text={barbecue.date} />
         <ParticipantsInfo value={barbecue.peopleList?.length} />
@@ -35,9 +35,13 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({ barbecue, onClose }) 
             key={person.id}
             name={person.name}
             contributionValue={person.contributionValue}
+            alreadyPaid={person.alreadyPaid}
           />
         ))}
       </PariticpantsWrapper>
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <AddParticipanButton type="primary">Adicionar Participante</AddParticipanButton>
+      </div>
     </Card>
   );
 };
@@ -54,12 +58,32 @@ const PariticpantsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-top: 2rem;
 `;
 
 const BarbecueTitle = styled(Typography.Title)`
   font-size: 32px;
-  /* overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis; */
   max-width: 390px;
+  margin: 0px;
+`;
+
+const BackButton = styled(Button)`
+  margin-bottom: 1rem;
+  &:hover {
+    border-color: ${({ theme }) => theme.palette.primary.main} !important;
+    color: black !important;
+  }
+`;
+
+const AddParticipanButton = styled(Button)`
+  width: 100%;
+  background-color: black;
+  border-radius: 18px;
+  margin-top: 2rem;
+  max-width: 220px;
+  &:hover {
+    /* opacity: 0.6; */
+    background-color: black !important;
+    border-color: white !important;
+  }
 `;
