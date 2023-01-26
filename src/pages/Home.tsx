@@ -8,8 +8,9 @@ import AddBarbecueCard from 'components/AddBarbecueCard';
 import { TrincaLogo } from 'assets/icons';
 import BarbecueDetails from 'components/BarbecueDetails';
 import { DefaultModal } from 'components/Modal';
-import PrimaryTitle from 'components/PrimaryTitle';
+
 import dayjs from 'dayjs';
+import BarbecueForm from 'components/BarbecueForm';
 
 const Home: React.FC = () => {
   const { barbecue, setBarbecue } = useGlobalContext();
@@ -19,9 +20,7 @@ const Home: React.FC = () => {
 
   const doSendForm = async () => {
     let values: any = null;
-
     values = await form.validateFields();
-
     const randomId = String(Math.floor(Math.random() * 200));
     const formattedDate = dayjs(values.date).format('DD/MM/YY');
     setBarbecue([
@@ -68,37 +67,7 @@ const Home: React.FC = () => {
         onOk={doSendForm}
         onCancel={onCloseModal}
       >
-        <PrimaryTitle text="Agendar churrasco" />
-        <Form
-          name="barbecueForm"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 32 }}
-          // style={{ minWidth: 280, marginTop: 24 }}
-          form={form}
-          autoComplete="off"
-        >
-          <AntForm.Item name="title" rules={[{ required: true, message: 'Insira um título' }]}>
-            <Input placeholder="Título" />
-          </AntForm.Item>
-          <AntForm.Item name="date" rules={[{ required: true, message: 'Insira uma data' }]}>
-            <DatePicker
-              disabledDate={date => date && date < dayjs().endOf('d').subtract(1, 'd')}
-              placeholder="Data do churrasco"
-              style={{ width: '100%' }}
-              format="DD/MM/YYYY"
-            />
-          </AntForm.Item>
-          <AntForm.Item
-            name="description"
-            rules={[{ required: true, message: 'Insira uma descrição para o evento' }]}
-          >
-            <Input placeholder="Descrição" />
-          </AntForm.Item>
-
-          <AntForm.Item name="observation">
-            <Input placeholder="Observações adicionais" />
-          </AntForm.Item>
-        </Form>
+        <BarbecueForm onClose={onCloseModal} form={form} />
       </DefaultModal>
     </Wrapper>
   );
@@ -133,14 +102,6 @@ const LogoWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-`;
-
-const Form = styled(AntForm)`
-  min-width: 280px;
-  margin-top: 24px;
-  @media (max-width: 768px) {
-    min-width: unset;
-  }
 `;
 
 export default Home;

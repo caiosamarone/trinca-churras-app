@@ -1,13 +1,13 @@
 import { IBarbecue } from 'contexts/GlobalContext';
-import { Card, Typography } from 'antd';
+import { Card } from 'antd';
 import styled from 'styled-components';
-import { IconMoney, IconPeople } from 'assets/icons';
+
 import { SetStateAction } from 'react';
 import ParticipantsInfo from './ParticipantsInfo';
 import MoneyInfo from './MoneyInfo';
 import PrimaryTitle from './PrimaryTitle';
 import SecondaryTitle from './SecondaryTitle';
-const { Paragraph } = Typography;
+import dayjs from 'dayjs';
 
 interface BarbecueCardProps {
   barbecue: IBarbecue;
@@ -15,6 +15,9 @@ interface BarbecueCardProps {
 }
 
 const BarbecueCard: React.FC<BarbecueCardProps> = ({ barbecue, selectBarbecue }) => {
+  const splitted = barbecue.date.split('/');
+  const formatted = `${splitted[0]}/${splitted[1]}`;
+
   return (
     <Card
       style={{ width: '282px', borderRadius: '2px', height: '192px' }}
@@ -22,7 +25,7 @@ const BarbecueCard: React.FC<BarbecueCardProps> = ({ barbecue, selectBarbecue })
       bodyStyle={{ height: '100%', padding: '18px', cursor: 'pointer' }}
       onClick={() => selectBarbecue(barbecue)}
     >
-      <PrimaryTitle text={barbecue.date} />
+      <PrimaryTitle text={formatted} />
       <SecondaryTitle text={barbecue.title} wrapText />
       <Footer>
         <ParticipantsInfo value={barbecue?.peopleList?.length} />

@@ -24,7 +24,7 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({ barbecue, onClose }) 
         <ParticipantsInfo value={barbecue.peopleList?.length} />
       </WrapperHeader>
       <WrapperHeader>
-        <BarbecueTitle>{barbecue.title}</BarbecueTitle>
+        <BarbecueTitle id="title__event">{barbecue.title}</BarbecueTitle>
 
         <MoneyInfo value={barbecue.totalAmount} />
       </WrapperHeader>
@@ -71,7 +71,7 @@ const PariticpantsWrapper = styled.div`
 const BarbecueTitle = styled(Typography.Title)`
   font-size: 32px;
   max-width: 390px;
-  margin: 0px;
+  margin: 0px !important;
 `;
 
 const BackButton = styled(Button)`
