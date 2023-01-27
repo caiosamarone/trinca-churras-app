@@ -29,7 +29,6 @@ const Home: React.FC = () => {
         title: values.title,
         date: formattedDate,
         observation: values.observation,
-        totalAmount: '0',
         description: values.description,
         id: randomId,
         peopleList: [],

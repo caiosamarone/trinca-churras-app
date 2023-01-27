@@ -2,7 +2,6 @@ export default [
   {
     id: '9483984474',
     date: '30/03',
-    totalAmount: '220',
     description: 'Quem for levar bebida, levar Heineken! =)',
     title: 'Churras da Trinca',
     peopleList: [
@@ -29,7 +28,6 @@ export default [
   {
     id: '549859485',
     date: '10/04',
-    totalAmount: '900',
     description: 'Local: Jockey Club',
     title: 'Aniversário do Pedro',
     observation: 'Levar carne de primeira!!!',

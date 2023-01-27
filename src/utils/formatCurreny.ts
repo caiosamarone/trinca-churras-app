@@ -1,8 +1,8 @@
 export const formatBRLStringToNumber = (brlString: string) => {
   const formattedAmount = brlString.replace('R$ ', '').replace('.', '');
   const removePoints = formattedAmount.replace('.', '');
-  const change = removePoints.replace(',', '.');
-  return Number(change);
+  const changeCommaToPoints = removePoints.replace(',', '.');
+  return Number(changeCommaToPoints);
 };
 
 export const formatNumberToBrlString = (amount: number) => {
