@@ -48,7 +48,7 @@ const ParticipantForm: React.FC<Props> = ({ form }) => {
         autoComplete="off"
       >
         <AntForm.Item name="name" rules={[{ required: true, message: 'Insira um nome' }]}>
-          <Input placeholder="Nome" />
+          <Input placeholder="Nome" maxLength={30} />
         </AntForm.Item>
         <Radio.Group onChange={onChange} value={drinkValue}>
           <Radio value={1}>Vou levar bebida</Radio>
@@ -59,7 +59,10 @@ const ParticipantForm: React.FC<Props> = ({ form }) => {
         </Typography.Paragraph>
         <AntForm.Item
           name="contributionValue"
-          rules={[{ required: true, message: 'Insira um contribuição para o churras' }]}
+          rules={[
+            { required: true, message: 'Insira um contribuição para o churras' },
+            { max: 5, message: 'Muito dinheiro! É apenas uma contribuição =)' },
+          ]}
         >
           {inputNode}
         </AntForm.Item>

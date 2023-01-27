@@ -22,7 +22,7 @@ const BarbecueForm: React.FC<Props> = ({ form }) => {
         autoComplete="off"
       >
         <AntForm.Item name="title" rules={[{ required: true, message: 'Insira um título' }]}>
-          <Input placeholder="Título" />
+          <Input placeholder="Título" maxLength={40} />
         </AntForm.Item>
         <AntForm.Item name="date" rules={[{ required: true, message: 'Insira uma data' }]}>
           <DatePicker
@@ -36,11 +36,11 @@ const BarbecueForm: React.FC<Props> = ({ form }) => {
           name="description"
           rules={[{ required: true, message: 'Insira uma descrição para o evento' }]}
         >
-          <Input placeholder="Descrição" />
+          <Input placeholder="Descrição" maxLength={100} />
         </AntForm.Item>
 
         <AntForm.Item name="observation">
-          <Input placeholder="Observações adicionais" />
+          <Input placeholder="Observações adicionais" maxLength={100} />
         </AntForm.Item>
       </Form>
     </>

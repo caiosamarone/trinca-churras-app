@@ -33,7 +33,14 @@ export default [
     description: 'Local: Jockey Club',
     title: 'Aniversário do Pedro',
     observation: 'Levar carne de primeira!!!',
-    peopleList: [],
+    peopleList: [
+      {
+        id: '543232',
+        name: 'Isabela Mendes',
+        contributionValue: 10,
+        alreadyPaid: false,
+      },
+    ],
   },
   {
     id: '32878273',
