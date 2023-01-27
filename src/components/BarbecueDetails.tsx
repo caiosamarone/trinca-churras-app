@@ -13,6 +13,7 @@ interface BarbecueDetailsProps {
 }
 
 const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({ barbecue, onClose }) => {
+  console.log(barbecue);
   return (
     <Card
       style={{ width: '100%', borderRadius: '2px', height: '100%', marginTop: '-40px' }}
@@ -25,9 +26,10 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({ barbecue, onClose }) 
       </WrapperHeader>
       <WrapperHeader>
         <BarbecueTitle id="title__event">{barbecue.title}</BarbecueTitle>
-
         <MoneyInfo value={barbecue.totalAmount} />
       </WrapperHeader>
+      <div> {barbecue.description}</div>
+      <div>Obs: {barbecue.observation}</div>
       {!!barbecue.peopleList?.length ? (
         <PariticpantsWrapper>
           {barbecue.peopleList?.map(person => (
@@ -59,6 +61,9 @@ const WrapperHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const PariticpantsWrapper = styled.div`
@@ -72,6 +77,9 @@ const BarbecueTitle = styled(Typography.Title)`
   font-size: 32px;
   max-width: 390px;
   margin: 0px !important;
+  @media (max-width: 768px) {
+    max-width: unset;
+  }
 `;
 
 const BackButton = styled(Button)`
@@ -94,3 +102,5 @@ const AddParticipanButton = styled(Button)`
     border-color: white !important;
   }
 `;
+
+const ObservationWrapper = styled.div``;
