@@ -18,7 +18,7 @@ export interface IBarbecue {
   id: string;
   title: string;
   date: string;
-  totalAmount: string;
+
   description: string;
   observation?: string;
   peopleList?: IParticipant[];
