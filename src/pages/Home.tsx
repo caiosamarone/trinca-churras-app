@@ -50,7 +50,7 @@ const Home: React.FC = () => {
           <BarbecueDetails barbecue={selectedBarbecue} onClose={() => setSelectedBarbecue({})} />
         ) : (
           <CardsWrapper id="wrapper__cards">
-            {barbecue.map(b => (
+            {barbecue?.map(b => (
               <BarbecueCard key={b.id} barbecue={b} selectBarbecue={setSelectedBarbecue} />
             ))}
             <AddBarbecueCard handleClick={() => setAddBarbecueModalVisible(true)} />

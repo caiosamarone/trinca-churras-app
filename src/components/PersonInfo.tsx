@@ -1,26 +1,44 @@
-import { IParticipant } from 'contexts/GlobalContext';
+import { IParticipant, useGlobalContext } from 'contexts/GlobalContext';
 import styled from 'styled-components';
 import SecondaryTitle from './SecondaryTitle';
 import { CheckCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Tooltip } from 'antd';
-const PersonInfo: React.FC<IParticipant> = ({ id, name, contributionValue, alreadyPaid }) => {
+import { formatNumberToBrlString } from 'utils/formatCurreny';
+
+interface Props extends IParticipant {
+  barbecueId: string;
+}
+
+const PersonInfo: React.FC<Props> = ({ id, name, contributionValue, alreadyPaid, barbecueId }) => {
+  const { handleDeleteParticipant, checkParticipantPaid } = useGlobalContext();
+
   return (
     <ItemsWrapper>
       <SecondaryTitle wrapText text={name} alreadyPaid={alreadyPaid} personName />
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-        <SecondaryTitle text={`R$ ${contributionValue}`} alreadyPaid={alreadyPaid} personName />
+        <SecondaryTitle
+          text={`${formatNumberToBrlString(contributionValue)}`}
+          alreadyPaid={alreadyPaid}
+          personName
+        />
 
         <Tooltip
           title={alreadyPaid ? 'Este participante já pagou' : 'Marcar que participante já pagou'}
         >
           <CheckCircleOutlined
-            disabled
+            disabled={alreadyPaid}
+            onClick={() => checkParticipantPaid(barbecueId, id)}
             style={{ cursor: 'pointer', fontSize: '20px', opacity: alreadyPaid ? 0.5 : 1 }}
           />
         </Tooltip>
 
         <Tooltip title="Remover Participante">
-          <DeleteOutlined style={{ cursor: 'pointer', fontSize: '20px' }} />
+          <DeleteOutlined
+            style={{ cursor: 'pointer', fontSize: '20px' }}
+            onClick={() => {
+              handleDeleteParticipant(barbecueId, id);
+            }}
+          />
         </Tooltip>
       </div>
     </ItemsWrapper>

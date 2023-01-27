@@ -5,8 +5,8 @@ import styled from 'styled-components';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const onSubmit = (values: any) => {
-    navigate('/churrascos');
+  const onSubmit = () => {
+    navigate('/agenda-de-churrascos');
   };
   return (
     <Wrapper>

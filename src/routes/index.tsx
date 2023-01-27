@@ -6,7 +6,7 @@ function Routes() {
     <BrowserRouter>
       <RouterDOM>
         <Route path="/" element={<Login />} />
-        <Route path="/churrascos" element={<Home />} />
+        <Route path="/agenda-de-churrascos" element={<Home />} />
       </RouterDOM>
     </BrowserRouter>
   );

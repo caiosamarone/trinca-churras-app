@@ -1,6 +1,6 @@
 import { Card, Typography } from 'antd';
 import styled from 'styled-components';
-import { IconBBQ, IconMoney, IconPeople } from 'assets/icons';
+import { IconBBQ } from 'assets/icons';
 const { Paragraph } = Typography;
 
 interface Props {

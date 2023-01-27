@@ -34,7 +34,6 @@ const wrapPoints = css`
 
 const Title = styled(Paragraph)<{ wrapText: boolean }>`
   font-size: 21px;
-  /* color: ${props => (props.wrapText ? 'red' : 'blue')}; */
   margin: 0px !important;
   ${props => (props.wrapText ? wrapPoints : null)}
 `;

@@ -4,12 +4,13 @@ import ptBR from 'antd/lib/locale/pt_BR';
 import { createContext } from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
+import initialBarbecueState from 'mocks/initialBarbecueState';
 
 dayjs.locale('pt-br');
 export interface IParticipant {
   id: string;
   name: string;
-  contributionValue: string;
+  contributionValue: number;
   alreadyPaid: boolean;
 }
 
@@ -26,6 +27,9 @@ export interface IBarbecue {
 interface IGlobalProps {
   barbecue: IBarbecue[];
   setBarbecue: (values: IBarbecue[]) => void;
+  handleAddParticipant: (participant: IParticipant, id: string) => void;
+  handleDeleteParticipant: (barbecueId: string, participantId: string) => void;
+  checkParticipantPaid: (barbecueId: string, participantId: string) => void;
 }
 interface Props {
   children: React.ReactElement;
@@ -37,67 +41,64 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
   const [barbecue, setBarbecue] = useState<IBarbecue[]>([]);
 
   useEffect(() => {
-    setBarbecue([
-      {
-        id: '1',
-        date: '12/02',
-        totalAmount: '220',
-        description: 'Churras da galera',
-        title: 'Churras 2',
-        peopleList: [
-          {
-            id: '1',
-            name: 'caio',
-            contributionValue: '40',
-            alreadyPaid: true,
-          },
-          {
-            id: '2',
-            name: 'pedro',
-            contributionValue: '20',
-            alreadyPaid: false,
-          },
-          {
-            id: '3',
-            name: 'Liandra',
-            contributionValue: '10',
-            alreadyPaid: false,
-          },
-        ],
-      },
-      {
-        id: '2',
-        date: '12/02',
-        totalAmount: '900',
-        description: 'Churras da galera',
-        title: 'Churras caio',
-        peopleList: [],
-      },
-      {
-        id: '3',
-        date: '12/02',
-        totalAmount: '189',
-        description: 'Churras da galera',
-        title: 'Churras sem compromisso',
-        peopleList: [],
-      },
-    ]);
+    setBarbecue(initialBarbecueState);
+    // if (!localStorage.getItem('barbecue')?.length) {
+    //   localStorage.setItem('barbecue', JSON.stringify(initialBarbecueState));
+    // }
   }, []);
 
-  //todo => funcao de deletar participante
-  //todo => funcao que atualiza lista de participantes de um churrasco, e atualiza o total amount
-  //todo => funcao que checa se o usuario ja pagou um churrasco
-  const handleAddParticipant = (data: IParticipant) => {};
+  const handleAddParticipant = (data: IParticipant, barbecueId: string) => {
+    setBarbecue(
+      barbecue?.map((b: IBarbecue) => {
+        if (b.id === barbecueId) {
+          const actualList = b.peopleList?.concat(data);
+          return { ...b, peopleList: actualList };
+        } else {
+          return b;
+        }
+      }),
+    );
+  };
 
-  const handleCreateBarbecue = (data: IBarbecue) => {};
+  const handleDeleteParticipant = (barbecueId: string, participantId: string) => {
+    setBarbecue(
+      barbecue?.map((b: IBarbecue) => {
+        if (b.id === barbecueId) {
+          const refreshedList = b.peopleList?.filter(p => p.id !== participantId);
+          return { ...b, peopleList: refreshedList };
+        } else {
+          return b;
+        }
+      }),
+    );
+  };
 
-  const handleDeleteParticipant = (participant: IParticipant) => {};
+  const checkParticipantPaid = (barbecueId: string, participantId: string) => {
+    setBarbecue(
+      barbecue.map((b: IBarbecue) => {
+        if (b.id === barbecueId) {
+          const newObject = b.peopleList?.map((p: IParticipant) => {
+            if (p.id === participantId) {
+              return { ...p, alreadyPaid: true };
+            } else {
+              return p;
+            }
+          });
 
-  const checkParticipantPaid = (participan: IParticipant) => {};
+          return { ...b, peopleList: newObject };
+        } else {
+          return b;
+        }
+      }),
+    );
+  };
 
   const context = {
     barbecue,
     setBarbecue,
+    handleAddParticipant,
+    handleDeleteParticipant,
+    checkParticipantPaid,
   };
 
   return (
