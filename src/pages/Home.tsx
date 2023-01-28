@@ -10,6 +10,7 @@ import { DefaultModal } from 'components/Modal';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AddBarbecueCard, BarbecueCard, BarbecueDetails, BarbecueForm } from 'components';
+import { v4 as uuidv4 } from 'uuid';
 
 const Home: React.FC = () => {
   const { barbecue, setBarbecue } = useGlobalContext();
@@ -37,8 +38,9 @@ const Home: React.FC = () => {
   const doSendForm = async () => {
     let values: any = null;
     values = await form.validateFields();
-    const randomId = String(Math.floor(Math.random() * 200));
+    const randomId = uuidv4();
     const formattedDate = dayjs(values.date).format('DD/MM/YY');
+
     setBarbecue([
       ...barbecue,
       {

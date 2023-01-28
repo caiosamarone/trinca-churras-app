@@ -15,6 +15,7 @@ import { DefaultModal } from './Modal';
 
 import { formatBRLStringToNumber } from 'utils/formatCurreny';
 import { toast } from 'react-toastify';
+import { v4 as uuidv4 } from 'uuid';
 
 interface BarbecueDetailsProps {
   barbecue: IBarbecue;
@@ -71,7 +72,8 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
         return;
       }
 
-      const randomId = String(Math.floor(Math.random() * 200));
+      const randomId = uuidv4();
+
       handleAddParticipant(
         {
           id: randomId,
