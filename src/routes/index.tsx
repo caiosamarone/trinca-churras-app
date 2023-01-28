@@ -1,5 +1,6 @@
 import Home from 'pages/Home';
 import Login from 'pages/Login';
+import NotFound from 'pages/NotFound';
 import { BrowserRouter, Routes as RouterDOM, Route } from 'react-router-dom';
 function Routes() {
   return (
@@ -7,6 +8,7 @@ function Routes() {
       <RouterDOM>
         <Route path="/" element={<Login />} />
         <Route path="/agenda-de-churrascos" element={<Home />} />
+        <Route path="*" element={<NotFound />} />
       </RouterDOM>
     </BrowserRouter>
   );

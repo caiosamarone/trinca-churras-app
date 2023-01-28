@@ -40,11 +40,22 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
   const [barbecue, setBarbecue] = useState<IBarbecue[]>([]);
 
   useEffect(() => {
-    setBarbecue(initialBarbecueState);
-    // if (!localStorage.getItem('barbecue')?.length) {
-    //   localStorage.setItem('barbecue', JSON.stringify(initialBarbecueState));
-    // }
+    if (!localStorage.getItem('barbecue')?.length) {
+      localStorage.setItem('barbecue', JSON.stringify(initialBarbecueState));
+      setBarbecue(initialBarbecueState);
+    } else if (localStorage.getItem('barbecue')?.length) {
+      const localStorageArray = localStorage.getItem('barbecue');
+      if (localStorageArray) {
+        setBarbecue(JSON.parse(localStorageArray));
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    if (barbecue?.length) {
+      localStorage.setItem('barbecue', JSON.stringify(barbecue));
+    }
+  }, [barbecue]);
 
   const handleAddParticipant = (data: IParticipant, barbecueId: string) => {
     setBarbecue(
