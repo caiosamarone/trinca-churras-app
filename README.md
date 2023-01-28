@@ -4,7 +4,7 @@ A barbecue scheduler to organize events and parties
 
 ## Stacks
 
-**Front-end:** React, Typescript, AntDesign, ContextAPI, Vite
+**Front-end:** React, Typescript, AntDesign, ContextAPI, Vite, Styled Components
 
 **Deploy:** https://elaborate-dasik-c27a20.netlify.app/
 
