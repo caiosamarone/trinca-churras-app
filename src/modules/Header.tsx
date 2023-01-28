@@ -13,7 +13,6 @@ const Header: React.FC = () => {
   };
   return (
     <Wrapper>
-      <img src={BBQTitle} style={{ width: '100%', height: '203px' }} />
       <div
         style={{
           maxWidth: '600px',
@@ -34,6 +33,7 @@ const Header: React.FC = () => {
 
 const Wrapper = styled.header`
   width: 100%;
+  background-image: url('bbq-pattern.svg');
   height: 203px;
   background-color: ${({ theme }) => theme.palette.primary.main};
 `;
@@ -41,19 +41,19 @@ const Wrapper = styled.header`
 const Title = styled(AntTitle)`
   font-size: 32px !important;
   position: relative;
-  margin-top: -150px;
+  margin-top: 4.5rem;
   font-weight: bold !important;
 `;
 
 const LogoutIcon = styled(LogoutOutlined)`
   position: absolute;
   font-size: 22px;
-  top: -140px;
+  top: 80px;
   right: 20px;
   cursor: pointer;
   @media (max-width: 768px) {
-    top: -180px;
-    right: 10px;
+    top: 20px;
+    right: 15px;
   }
 `;
 export default Header;
