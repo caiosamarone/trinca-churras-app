@@ -47,7 +47,7 @@ const Title = styled(AntTitle)`
 
 const LogoutIcon = styled(LogoutOutlined)`
   position: absolute;
-  font-size: 20px;
+  font-size: 22px;
   top: -140px;
   right: 20px;
   cursor: pointer;

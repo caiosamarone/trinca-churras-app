@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Form as AntForm, Input, DatePicker } from 'antd';
 import { useGlobalContext } from 'contexts/GlobalContext';
@@ -8,6 +8,7 @@ import AddBarbecueCard from 'components/AddBarbecueCard';
 import { TrincaLogo } from 'assets/icons';
 import BarbecueDetails from 'components/BarbecueDetails';
 import { DefaultModal } from 'components/Modal';
+import { useNavigate } from 'react-router-dom';
 
 import dayjs from 'dayjs';
 import BarbecueForm from 'components/BarbecueForm';
@@ -17,6 +18,13 @@ const Home: React.FC = () => {
   const [selectedBarbecue, setSelectedBarbecue] = useState<any>({});
   const [addBarbecueModalVisible, setAddBarbecueModalVisible] = useState(false);
   const [form] = AntForm.useForm();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem('user')) {
+      navigate('/');
+    }
+  }, []);
 
   const doSendForm = async () => {
     let values: any = null;
