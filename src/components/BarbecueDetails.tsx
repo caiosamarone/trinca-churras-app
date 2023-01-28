@@ -147,6 +147,7 @@ const WrapperHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
   @media (max-width: 768px) {
     flex-direction: column;
   }
@@ -160,7 +161,7 @@ const PariticpantsWrapper = styled.div`
 `;
 
 const BarbecueTitle = styled(Typography.Title)`
-  font-size: 32px;
+  font-size: 36px !important;
   max-width: 390px;
   margin: 0px !important;
   @media (max-width: 768px) {

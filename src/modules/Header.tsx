@@ -9,6 +9,7 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     navigate('/');
+    localStorage.setItem('user', '');
   };
   return (
     <Wrapper>
@@ -41,6 +42,7 @@ const Title = styled(AntTitle)`
   font-size: 32px !important;
   position: relative;
   margin-top: -150px;
+  font-weight: bold !important;
 `;
 
 const LogoutIcon = styled(LogoutOutlined)`

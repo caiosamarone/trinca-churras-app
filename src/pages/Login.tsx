@@ -5,7 +5,9 @@ import styled from 'styled-components';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+  const [form] = AntForm.useForm();
   const onSubmit = () => {
+    localStorage.setItem('user', form.getFieldValue('email'));
     navigate('/agenda-de-churrascos');
   };
   return (
@@ -16,6 +18,7 @@ const Login: React.FC = () => {
           <Title>Agenda de Churras</Title>
           <FormWrapper>
             <AntForm
+              form={form}
               name="basic"
               labelCol={{ span: 8 }}
               wrapperCol={{ span: 32 }}
@@ -25,7 +28,7 @@ const Login: React.FC = () => {
               // onFinishFailed={onSubmitFailed}
               autoComplete="off"
             >
-              <label>
+              <label className="label__email">
                 Login
                 <AntForm.Item
                   name="email"
@@ -34,7 +37,7 @@ const Login: React.FC = () => {
                   <Input placeholder="e-mail" style={{ width: '100%' }} />
                 </AntForm.Item>
               </label>
-              <label>
+              <label className="label__password">
                 Senha
                 <AntForm.Item
                   name="password"
@@ -58,8 +61,11 @@ const Login: React.FC = () => {
 const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.primary.main};
   height: 100vh;
+  .label__password,
+  .label__email {
+    font-weight: bold;
+  }
 `;
-
 const ContentWrapper = styled.div`
   max-width: 600px;
   margin: 0 auto;
@@ -78,6 +84,7 @@ const Form = styled.div`
 
 const Title = styled(Typography.Title)`
   font-size: 32px !important;
+  font-weight: bold !important;
 `;
 
 const FormWrapper = styled.div`

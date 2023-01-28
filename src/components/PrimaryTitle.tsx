@@ -13,6 +13,7 @@ const PrimaryTitle: React.FC<Props> = ({ text }) => {
 const Title = styled(Paragraph)`
   font-size: 28px;
   margin: 0px !important;
+  font-weight: bold !important;
 `;
 
 export default PrimaryTitle;
