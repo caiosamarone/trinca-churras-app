@@ -9,33 +9,17 @@ interface Props {
   personName?: boolean;
 }
 
-const SecondaryTitle: React.FC<Props> = ({
-  text,
-  alreadyPaid = true,
-  personName = false,
-  wrapText = false,
-}) => {
+const SecondaryTitle: React.FC<Props> = ({ text, alreadyPaid = true, personName = false }) => {
   return (
-    <Title
-      wrapText={wrapText}
-      style={{ textDecoration: alreadyPaid && personName ? 'line-through' : 'unset' }}
-    >
+    <Title style={{ textDecoration: alreadyPaid && personName ? 'line-through' : 'unset' }}>
       {text}
     </Title>
   );
 };
 
-const wrapPoints = css`
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 240px;
-`;
-
-const Title = styled(Paragraph)<{ wrapText: boolean }>`
+const Title = styled(Paragraph)`
   font-size: 21px;
   margin: 0px !important;
-  ${props => (props.wrapText ? wrapPoints : null)}
 `;
 
 export default SecondaryTitle;

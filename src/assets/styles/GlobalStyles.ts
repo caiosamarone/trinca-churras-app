@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
 	:root {
-		font-family: Raleway,Inter, Avenir, Helvetica, Arial, sans-serif,;
+		font-family: Raleway,Inter, Avenir, Helvetica, Arial, sans-serif;
 		font-size: 16px;
 		line-height: 24px;
 		font-weight: 400;
@@ -58,13 +58,35 @@ const GlobalStyles = createGlobalStyle`
 		cursor: pointer;
 		transition: border-color 0.25s;
 	}
-	button:hover {
-		border-color: #646cff;
+	.ant-btn-primary:hover {	
+		border: 1.5px solid white;
+	}
+	.ant-input-password:hover,
+	.ant-input-password:focus,
+	.ant-input-affix-wrapper-focused,
+	.ant-input:hover,
+	.ant-input:focus,
+	.ant-picker:hover,
+	.ant-picker-focused {
+    	border-color: #6a6133 !important;
+ 	}
+
+	.ant-btn-default:hover,
+	.ant-btn-default:focus {
+		border-color: #6a6133 !important;
+		color: black !important;
 	}
 	button:focus,
 	button:focus-visible {
 		outline: 4px auto -webkit-focus-ring-color;
 	}
+	.ant-radio-wrapper{
+		border-color: #6a6133 !important;
+	}
+	/* .ant-radio-checked .ant-radio-inner{
+		border-color: #6a6133 !important;
+		background-color: #6a6133 !important;
+	} */
 
 	@media (prefers-color-scheme: light) {
 		:root {

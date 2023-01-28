@@ -1,13 +1,11 @@
 import { IBarbecue, useGlobalContext } from 'contexts/GlobalContext';
-import { Card } from 'antd';
+import { Card, Typography } from 'antd';
 import styled from 'styled-components';
 
 import { SetStateAction, useState, useEffect, useCallback } from 'react';
 import ParticipantsInfo from './ParticipantsInfo';
 import MoneyInfo from './MoneyInfo';
 import PrimaryTitle from './PrimaryTitle';
-import SecondaryTitle from './SecondaryTitle';
-import dayjs from 'dayjs';
 
 interface BarbecueCardProps {
   barbecue: IBarbecue;
@@ -40,7 +38,8 @@ const BarbecueCard: React.FC<BarbecueCardProps> = ({ barbecue, selectBarbecue })
       onClick={() => selectBarbecue(barbecue)}
     >
       <PrimaryTitle text={formatted} />
-      <SecondaryTitle text={barbecue.title} wrapText />
+
+      <BarbecueTitle>{barbecue.title}</BarbecueTitle>
       <Footer>
         <ParticipantsInfo value={barbecue?.peopleList?.length} />
         <MoneyInfo value={totalAmount || 0} />
@@ -54,5 +53,14 @@ export default BarbecueCard;
 const Footer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
+`;
+
+const BarbecueTitle = styled(Typography.Paragraph)`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 240px;
+  font-size: 21px;
+  margin: 0px !important;
 `;

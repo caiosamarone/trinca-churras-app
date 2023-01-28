@@ -2,7 +2,7 @@ import { IParticipant, useGlobalContext } from 'contexts/GlobalContext';
 import styled from 'styled-components';
 import SecondaryTitle from './SecondaryTitle';
 import { CheckCircleOutlined, DeleteOutlined } from '@ant-design/icons';
-import { Tooltip } from 'antd';
+import { Tooltip, Typography } from 'antd';
 import { formatNumberToBrlString } from 'utils/formatCurreny';
 
 interface Props extends IParticipant {
@@ -14,7 +14,9 @@ const PersonInfo: React.FC<Props> = ({ id, name, contributionValue, alreadyPaid,
 
   return (
     <ItemsWrapper>
-      <SecondaryTitle wrapText text={name} alreadyPaid={alreadyPaid} personName />
+      <PersonName style={{ textDecoration: alreadyPaid ? 'line-through' : 'unset' }}>
+        {name}
+      </PersonName>
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
         <SecondaryTitle
           text={`${formatNumberToBrlString(contributionValue)}`}
@@ -51,6 +53,15 @@ const ItemsWrapper = styled.div`
   border-bottom: 1px solid rgba(229, 194, 49, 0.5);
   padding: 6px;
   justify-content: space-between;
+`;
+
+const PersonName = styled(Typography.Paragraph)`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 240px;
+  font-size: 21px;
+  margin: 0px !important;
 `;
 
 export default PersonInfo;

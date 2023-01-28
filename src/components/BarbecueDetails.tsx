@@ -10,7 +10,7 @@ import useMobile from 'hooks/useMobile';
 import styled from 'styled-components';
 import { DefaultModal } from './Modal';
 import ParticipantForm from './ParticipantForm';
-import { formatBRLStringToNumber, formatNumberToBrlString } from 'utils/formatCurreny';
+import { formatBRLStringToNumber } from 'utils/formatCurreny';
 
 interface BarbecueDetailsProps {
   barbecue: IBarbecue;
@@ -67,7 +67,7 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
       },
       barbequeSelected.id,
     );
-    //send to context
+
     handleCloseModal();
     //TODO exibir toast de sucesso e colocar um try
   };
@@ -172,7 +172,7 @@ const BackButton = styled(Button)`
   margin-bottom: 1rem;
   &:hover {
     border-color: ${({ theme }) => theme.palette.primary.main} !important;
-    color: black !important;
+    color: ${({ theme }) => theme.palette.text.primary} !important;
   }
 `;
 
@@ -183,8 +183,8 @@ const AddParticipanButton = styled(Button)`
   margin-top: 2rem;
   max-width: 220px;
   &:hover {
-    background-color: black !important;
-    border-color: white !important;
+    background-color: ${({ theme }) => theme.palette.text.primary} !important;
+    border-color: ${({ theme }) => theme.palette.text.white} !important;
   }
 `;
 

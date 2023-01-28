@@ -1,5 +1,5 @@
 import { BBQPattern, TrincaLogo } from 'assets/icons';
-import { Typography, Form as AntForm, Input, Button as AntButton } from 'antd';
+import { Typography, Form as AntForm, Input as AntInput, Button as AntButton } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -40,7 +40,7 @@ const Login: React.FC = () => {
                   name="password"
                   rules={[{ required: true, message: 'Insira sua senha' }]}
                 >
-                  <Input.Password placeholder="senha" />
+                  <Input.Password placeholder="senha" id="input__password" />
                 </AntForm.Item>
               </label>
               <Button type="primary" htmlType="submit">
@@ -93,9 +93,17 @@ const Button = styled(AntButton)`
   border-radius: 18px;
   margin-top: 12px;
   &:hover {
-    /* opacity: 0.6; */
-    background-color: black !important;
-    border-color: white !important;
+    background-color: ${({ theme }) => theme.palette.text.primary} !important;
+    border-color: ${({ theme }) => theme.palette.text.white} !important;
+  }
+`;
+
+const Input = styled(AntInput)`
+  &:hover {
+    border-color: #6a6133 !important;
+  }
+  .ant-input-password {
+    border-color: #6a6133 !important;
   }
 `;
 export default Login;
