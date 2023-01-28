@@ -58,6 +58,11 @@ const GlobalStyles = createGlobalStyle`
 		cursor: pointer;
 		transition: border-color 0.25s;
 	}
+	.ant-btn-primary {
+		background-color: black !important;
+		color: white !important;
+		border-radius: 18px;
+	}
 	.ant-btn-primary:hover {	
 		border: 1.5px solid white;
 	}
@@ -70,7 +75,14 @@ const GlobalStyles = createGlobalStyle`
 	.ant-picker-focused {
     	border-color: #6a6133 !important;
  	}
-
+	
+	.anticon-info-circle {
+    	overflow: hidden !important;
+		opacity: 0 !important;		
+		svg {
+			overflow: hidden;
+		}
+ 	 }
 	.ant-btn-default:hover,
 	.ant-btn-default:focus {
 		border-color: #6a6133 !important;

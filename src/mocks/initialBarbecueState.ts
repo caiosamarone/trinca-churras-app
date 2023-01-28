@@ -1,7 +1,7 @@
 export default [
   {
     id: '0ba1913a-23514-9b6f-8ba9c15b67b4',
-    date: '30/03',
+    date: '30/03/23',
     description: 'Quem for levar bebida, levar Heineken! =)',
     title: 'Churras da Trinca',
     peopleList: [
@@ -39,7 +39,7 @@ export default [
   },
   {
     id: '01ba1913ad-233514-9eb6f-8ba9c15b67b4',
-    date: '10/04',
+    date: '10/04/23',
     description: 'Local: Jockey Club',
     title: 'Aniversário do Pedro',
     observation: 'Levar carne de primeira!!!',
@@ -54,7 +54,7 @@ export default [
   },
   {
     id: '0ba1913a-235134-9b6f-8ba9c15b67b4',
-    date: '20/12',
+    date: '20/12/23',
     description: 'Pode trazer a família!',
     title: 'Fechamento do ano',
     peopleList: [],

@@ -1,5 +1,5 @@
-import { Button, Card, Typography, Form as AntForm } from 'antd';
-import { useCallback, useEffect, useState } from 'react';
+import { Button, Card, Typography, Form as AntForm, Tooltip, Modal } from 'antd';
+import { useCallback, useEffect, useState, useMemo } from 'react';
 import {
   MoneyInfo,
   ParticipantForm,
@@ -84,7 +84,7 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
         barbequeSelected.id,
       );
 
-      toast.success(`${values.name} foi convidado!`, {
+      toast.success(`${values.name} foi convidado(a)!`, {
         position: 'bottom-left',
         autoClose: 2000,
         hideProgressBar: false,
@@ -105,6 +105,32 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
         theme: 'light',
       });
     }
+  };
+
+  const listDetailsMemoized = useMemo(() => {
+    return (
+      <div>
+        <PrimaryTitle text={`${barbecue?.date} `} />
+        <p>{isMobile ? '_________________' : ' ______________________________________________'}</p>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {barbecue?.peopleList?.map(p => (
+            <SecondaryTitle
+              text={`${p.name} - R$ ${p.contributionValue}  ${p.alreadyPaid ? '(PAGO)' : ''}`}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }, [barbecue]);
+
+  const info = () => {
+    Modal.info({
+      icon: false,
+      title: <PrimaryTitle text={`${barbecue?.title} `} />,
+      content: listDetailsMemoized,
+      okText: 'Fechar',
+      onOk() {},
+    });
   };
 
   return (
@@ -135,8 +161,12 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
         </>
       )}
 
-      <div> {barbecue?.description}</div>
-      {barbecue?.observation && <div>Obs: {barbecue?.observation}</div>}
+      <DescriptionText> {barbecue?.description}</DescriptionText>
+      {barbecue?.observation && (
+        <DescriptionText>
+          <b>Obs:</b> {barbecue?.observation}
+        </DescriptionText>
+      )}
       {!!barbecue?.peopleList?.length ? (
         <PariticpantsWrapper>
           {barbecue?.peopleList?.map(person => (
@@ -156,10 +186,17 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
         </div>
       )}
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12 }}>
         <AddParticipanButton type="primary" onClick={() => setAddParticipantModalVisible(true)}>
           Adicionar Participante
         </AddParticipanButton>
+        {!!barbecue?.peopleList?.length && (
+          <Tooltip title="Veja os detalhes do evento. Copie os dados (ctrl c + ctrl v) e cole no whatsapp para compartilhar =)">
+            <AddParticipanButton style={{ maxWidth: '120px' }} type="primary" onClick={info}>
+              Copiar lista
+            </AddParticipanButton>
+          </Tooltip>
+        )}
       </div>
 
       <DefaultModal
@@ -228,4 +265,9 @@ const DetailsMobileInfo = styled.div`
   justify-content: space-between;
   margin-top: 1rem;
   margin-bottom: 1rem;
+`;
+
+const DescriptionText = styled(Typography.Paragraph)`
+  font-size: 17px;
+  margin: 0px !important;
 `;

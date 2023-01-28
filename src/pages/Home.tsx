@@ -25,7 +25,7 @@ const Home: React.FC = () => {
       navigate('/');
       return;
     }
-    toast.success(`Seja bem-vindo, ${user?.split('@')[0]}!`, {
+    toast.success(`Seja bem-vindo(a), ${user?.split('@')[0]}!`, {
       position: 'bottom-left',
       autoClose: 2000,
       hideProgressBar: false,

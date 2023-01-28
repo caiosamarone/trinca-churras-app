@@ -61,7 +61,7 @@ const ParticipantForm: React.FC<Props> = ({ form }) => {
           name="contributionValue"
           rules={[
             { required: true, message: 'Insira um contribuição para o churras' },
-            { max: 6, message: 'Muito dinheiro! É apenas uma contribuição =)' },
+            { max: 8, message: 'Muito dinheiro! É apenas uma contribuição =)' },
           ]}
         >
           {inputNode}
