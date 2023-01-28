@@ -13,7 +13,21 @@ const Login: React.FC = () => {
   return (
     <Wrapper>
       <ContentWrapper>
-        <img src={BBQPattern} style={{ width: '100%' }} />
+        <div
+          style={{
+            width: '100%',
+            backgroundImage:
+              'linear-gradient( to bottom, transparent 60%, #ffd836 100% ), url(bbq-pattern.svg)',
+          }}
+        >
+          <img
+            src={BBQPattern}
+            style={{
+              width: '100%',
+              opacity: 0,
+            }}
+          />
+        </div>
         <Form>
           <Title>Agenda de Churras</Title>
           <FormWrapper>
