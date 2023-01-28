@@ -16,4 +16,4 @@ const Title = styled(Paragraph)`
   font-weight: bold !important;
 `;
 
-export default PrimaryTitle;
+export { PrimaryTitle };

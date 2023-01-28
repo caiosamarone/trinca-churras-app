@@ -22,4 +22,4 @@ const Title = styled(Paragraph)`
   margin: 0px !important;
 `;
 
-export default SecondaryTitle;
+export { SecondaryTitle };

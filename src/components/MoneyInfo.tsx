@@ -33,4 +33,4 @@ const AmountValue = styled.p`
   margin: 0;
 `;
 
-export default MoneyInfo;
+export { MoneyInfo };

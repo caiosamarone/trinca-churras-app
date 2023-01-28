@@ -1,9 +1,10 @@
 import { IParticipant, useGlobalContext } from 'contexts/GlobalContext';
 import styled from 'styled-components';
-import SecondaryTitle from './SecondaryTitle';
+
 import { CheckCircleOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Tooltip, Typography } from 'antd';
 import { formatNumberToBrlString } from 'utils/formatCurreny';
+import { SecondaryTitle } from './SecondaryTitle';
 
 interface Props extends IParticipant {
   barbecueId: string;
@@ -64,4 +65,4 @@ const PersonName = styled(Typography.Paragraph)`
   margin: 0px !important;
 `;
 
-export default PersonInfo;
+export { PersonInfo };

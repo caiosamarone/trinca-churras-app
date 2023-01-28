@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 import styled from 'styled-components';
-import { Form as AntForm, Input, DatePicker } from 'antd';
+import { Form as AntForm } from 'antd';
 import { useGlobalContext } from 'contexts/GlobalContext';
 import Header from 'modules/Header';
-import BarbecueCard from 'components/BarbecueCard';
-import AddBarbecueCard from 'components/AddBarbecueCard';
 import { TrincaLogo } from 'assets/icons';
-import BarbecueDetails from 'components/BarbecueDetails';
 import { DefaultModal } from 'components/Modal';
-import { useNavigate } from 'react-router-dom';
-
-import dayjs from 'dayjs';
-import BarbecueForm from 'components/BarbecueForm';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AddBarbecueCard, BarbecueCard, BarbecueDetails, BarbecueForm } from 'components';
 
 const Home: React.FC = () => {
   const { barbecue, setBarbecue } = useGlobalContext();
@@ -21,9 +19,19 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!localStorage.getItem('user')) {
+    const user = localStorage.getItem('user');
+    if (!user) {
       navigate('/');
+      return;
     }
+    toast.success(`Seja bem-vindo, ${user?.split('@')[0]}!`, {
+      position: 'bottom-left',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      progress: undefined,
+      theme: 'light',
+    });
   }, []);
 
   const doSendForm = async () => {
@@ -42,8 +50,18 @@ const Home: React.FC = () => {
         peopleList: [],
       },
     ]);
+    toast.success(`Churrasco 🍖 ${values.title} agendado `, {
+      position: 'bottom-left',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+
     onCloseModal();
-    //TODO exibir toast de sucesso e colocar um try
   };
   const onCloseModal = () => {
     form.resetFields();

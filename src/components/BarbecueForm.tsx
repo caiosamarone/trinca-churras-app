@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { Form as AntForm, Input, DatePicker } from 'antd';
-import PrimaryTitle from './PrimaryTitle';
+
 import dayjs from 'dayjs';
 
 import { FormInstance } from 'antd/lib/form/Form';
+import { PrimaryTitle } from './PrimaryTitle';
 
 interface Props {
   onClose: () => void;
@@ -55,4 +56,4 @@ const Form = styled(AntForm)`
   }
 `;
 
-export default BarbecueForm;
+export { BarbecueForm };

@@ -1,16 +1,20 @@
-import { Button, Card, Typography, Form as AntForm, Input } from 'antd';
+import { Button, Card, Typography, Form as AntForm } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
-import MoneyInfo from 'components/MoneyInfo';
-import ParticipantsInfo from 'components/ParticipantsInfo';
-import PersonInfo from 'components/PersonInfo';
-import PrimaryTitle from 'components/PrimaryTitle';
-import SecondaryTitle from 'components/SecondaryTitle';
+import {
+  MoneyInfo,
+  ParticipantForm,
+  ParticipantsInfo,
+  PersonInfo,
+  PrimaryTitle,
+  SecondaryTitle,
+} from 'components';
 import { IBarbecue, useGlobalContext } from 'contexts/GlobalContext';
 import useMobile from 'hooks/useMobile';
 import styled from 'styled-components';
 import { DefaultModal } from './Modal';
-import ParticipantForm from './ParticipantForm';
+
 import { formatBRLStringToNumber } from 'utils/formatCurreny';
+import { toast } from 'react-toastify';
 
 interface BarbecueDetailsProps {
   barbecue: IBarbecue;
@@ -49,27 +53,56 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
   };
   const doSendForm = async () => {
     let values: any = null;
-    values = await form.validateFields();
-    const formattedContribution = formatBRLStringToNumber(values.contributionValue);
+    try {
+      values = await form.validateFields();
+      const formattedContribution = formatBRLStringToNumber(values.contributionValue);
 
-    if (isNaN(formattedContribution) || formattedContribution <= 0) {
-      alert('Valor incorreto ou muito grande.'); //TROCAR PARA O TOAST
-      return;
+      if (isNaN(formattedContribution) || formattedContribution <= 0) {
+        toast.error(`Valor de contribuição incorreto ou muito grande.`, {
+          position: 'bottom-left',
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+        return;
+      }
+
+      const randomId = String(Math.floor(Math.random() * 200));
+      handleAddParticipant(
+        {
+          id: randomId,
+          alreadyPaid: false,
+          name: values.name,
+          contributionValue: formattedContribution,
+        },
+        barbequeSelected.id,
+      );
+
+      toast.success(`${values.name} foi convidado!`, {
+        position: 'bottom-left',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        progress: undefined,
+        theme: 'light',
+      });
+      handleCloseModal();
+    } catch (er) {
+      toast.error(`Erro =(`, {
+        position: 'bottom-left',
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
     }
-
-    const randomId = String(Math.floor(Math.random() * 200));
-    handleAddParticipant(
-      {
-        id: randomId,
-        alreadyPaid: false,
-        name: values.name,
-        contributionValue: formattedContribution,
-      },
-      barbequeSelected.id,
-    );
-
-    handleCloseModal();
-    //TODO exibir toast de sucesso e colocar um try
   };
 
   return (
@@ -135,13 +168,12 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
         onCancel={handleCloseModal}
       >
         <ParticipantForm onClose={handleCloseModal} form={form} />
-        {/* <BarbecueForm onClose={handleCloseModal} form={form} /> */}
       </DefaultModal>
     </Card>
   );
 };
 
-export default BarbecueDetails;
+export { BarbecueDetails };
 
 const WrapperHeader = styled.div`
   display: flex;

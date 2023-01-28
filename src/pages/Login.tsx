@@ -25,7 +25,6 @@ const Login: React.FC = () => {
               style={{ minWidth: 280 }}
               initialValues={{ remember: true }}
               onFinish={onSubmit}
-              // onFinishFailed={onSubmitFailed}
               autoComplete="off"
             >
               <label className="label__email">

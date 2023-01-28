@@ -5,6 +5,7 @@ import { createContext } from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 import initialBarbecueState from 'mocks/initialBarbecueState';
+import { ToastContainer } from 'react-toastify';
 
 dayjs.locale('pt-br');
 export interface IParticipant {
@@ -94,7 +95,6 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
               return p;
             }
           });
-
           return { ...b, peopleList: newObject };
         } else {
           return b;
@@ -113,6 +113,7 @@ export const GlobalProvider: React.FC<Props> = ({ children }) => {
 
   return (
     <ConfigProvider locale={ptBR}>
+      <ToastContainer />
       <GlobalContext.Provider value={context}>{children}</GlobalContext.Provider>
     </ConfigProvider>
   );

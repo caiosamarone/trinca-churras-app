@@ -37,7 +37,7 @@ const AddBarbecueCard: React.FC<Props> = ({ handleClick }) => {
   );
 };
 
-export default AddBarbecueCard;
+export { AddBarbecueCard };
 
 const Title = styled(Paragraph)`
   font-size: 21px;

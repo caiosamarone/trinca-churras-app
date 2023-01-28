@@ -3,9 +3,9 @@ import { Card, Typography } from 'antd';
 import styled from 'styled-components';
 
 import { SetStateAction, useState, useEffect, useCallback } from 'react';
-import ParticipantsInfo from './ParticipantsInfo';
-import MoneyInfo from './MoneyInfo';
-import PrimaryTitle from './PrimaryTitle';
+import { PrimaryTitle } from './PrimaryTitle';
+import { ParticipantsInfo } from './ParticipantsInfo';
+import { MoneyInfo } from './MoneyInfo';
 
 interface BarbecueCardProps {
   barbecue: IBarbecue;
@@ -48,8 +48,6 @@ const BarbecueCard: React.FC<BarbecueCardProps> = ({ barbecue, selectBarbecue })
   );
 };
 
-export default BarbecueCard;
-
 const Footer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -64,3 +62,5 @@ const BarbecueTitle = styled(Typography.Paragraph)`
   font-size: 21px;
   margin: 0px !important;
 `;
+
+export { BarbecueCard };

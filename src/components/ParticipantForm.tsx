@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { Form as AntForm, Input, InputNumber, Radio, RadioChangeEvent, Typography } from 'antd';
-import PrimaryTitle from './PrimaryTitle';
+import { Form as AntForm, Input, Radio, RadioChangeEvent, Typography } from 'antd';
 
 import { FormInstance } from 'antd/lib/form/Form';
 import { useState } from 'react';
 import { NumericFormat } from 'react-number-format';
+import { PrimaryTitle } from './PrimaryTitle';
 
 interface Props {
   onClose: () => void;
@@ -79,4 +79,4 @@ const Form = styled(AntForm)`
   }
 `;
 
-export default ParticipantForm;
+export { ParticipantForm };

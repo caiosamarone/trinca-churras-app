@@ -2,6 +2,7 @@ import { Typography } from 'antd';
 import { TrincaLogo } from 'assets/icons';
 import Header from 'modules/Header';
 import styled from 'styled-components';
+
 const NotFound: React.FC = () => {
   return (
     <Wrapper>
