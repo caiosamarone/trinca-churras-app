@@ -6,6 +6,7 @@ import styled from 'styled-components';
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [form] = AntForm.useForm();
+
   const onSubmit = () => {
     localStorage.setItem('user', form.getFieldValue('email'));
     navigate('/agenda-de-churrascos');
@@ -13,21 +14,9 @@ const Login: React.FC = () => {
   return (
     <Wrapper>
       <ContentWrapper>
-        <div
-          style={{
-            width: '100%',
-            backgroundImage:
-              'linear-gradient( to bottom, transparent 60%, #ffd836 100% ), url(bbq-pattern.svg)',
-          }}
-        >
-          <img
-            src={BBQPattern}
-            style={{
-              width: '100%',
-              opacity: 0,
-            }}
-          />
-        </div>
+        <ImageContainer>
+          <LogoIcon src={BBQPattern} />
+        </ImageContainer>
         <Form>
           <Title>Agenda de Churras</Title>
           <FormWrapper>
@@ -127,4 +116,14 @@ const Input = styled(AntInput)`
     border-color: #6a6133 !important;
   }
 `;
+
+const ImageContainer = styled.div`
+  width: 100%;
+  background-image: linear-gradient(to bottom, transparent 60%, #ffd836 100%), url(bbq-pattern.svg);
+`;
+const LogoIcon = styled.img`
+  width: 100%;
+  opacity: 0;
+`;
+
 export default Login;

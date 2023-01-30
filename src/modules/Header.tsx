@@ -1,4 +1,3 @@
-import { BBQTitle } from 'assets/icons';
 import styled from 'styled-components';
 import { Tooltip, Typography } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
@@ -13,20 +12,12 @@ const Header: React.FC = () => {
   };
   return (
     <Wrapper>
-      <div
-        style={{
-          maxWidth: '600px',
-          margin: '0 auto',
-          display: 'flex',
-          justifyContent: 'center',
-          position: 'relative',
-        }}
-      >
+      <HeaderContainer>
         <Title>Agenda de Churras</Title>
         <Tooltip title="Sair">
           <LogoutIcon onClick={handleLogout} />
         </Tooltip>
-      </div>
+      </HeaderContainer>
     </Wrapper>
   );
 };
@@ -55,5 +46,13 @@ const LogoutIcon = styled(LogoutOutlined)`
     top: 20px;
     right: 15px;
   }
+`;
+
+const HeaderContainer = styled.div`
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
 `;
 export default Header;

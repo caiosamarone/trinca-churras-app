@@ -109,16 +109,16 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
 
   const listDetailsMemoized = useMemo(() => {
     return (
-      <div>
+      <div className="container__details">
         <PrimaryTitle text={`${barbecue?.date} `} />
         <p>{isMobile ? '_________________' : ' ______________________________________________'}</p>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <PeopleContainer style={{ display: 'flex', flexDirection: 'column' }}>
           {barbecue?.peopleList?.map(p => (
             <SecondaryTitle
               text={`${p.name} - R$ ${p.contributionValue}  ${p.alreadyPaid ? '(PAGO)' : ''}`}
             />
           ))}
-        </div>
+        </PeopleContainer>
       </div>
     );
   }, [barbecue]);
@@ -186,7 +186,7 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
         </div>
       )}
 
-      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 12 }}>
+      <ButtonContainer>
         <AddParticipanButton type="primary" onClick={() => setAddParticipantModalVisible(true)}>
           Adicionar Participante
         </AddParticipanButton>
@@ -197,7 +197,7 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
             </AddParticipanButton>
           </Tooltip>
         )}
-      </div>
+      </ButtonContainer>
 
       <DefaultModal
         open={addParticpantModalVisible}
@@ -270,4 +270,15 @@ const DetailsMobileInfo = styled.div`
 const DescriptionText = styled(Typography.Paragraph)`
   font-size: 17px;
   margin: 0px !important;
+`;
+
+const PeopleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
 `;

@@ -18,7 +18,7 @@ const PersonInfo: React.FC<Props> = ({ id, name, contributionValue, alreadyPaid,
       <PersonName style={{ textDecoration: alreadyPaid ? 'line-through' : 'unset' }}>
         {name}
       </PersonName>
-      <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+      <ActionsContainer>
         <SecondaryTitle
           text={`${formatNumberToBrlString(contributionValue)}`}
           alreadyPaid={alreadyPaid}
@@ -43,7 +43,7 @@ const PersonInfo: React.FC<Props> = ({ id, name, contributionValue, alreadyPaid,
             }}
           />
         </Tooltip>
-      </div>
+      </ActionsContainer>
     </ItemsWrapper>
   );
 };
@@ -63,6 +63,12 @@ const PersonName = styled(Typography.Paragraph)`
   max-width: 240px;
   font-size: 21px;
   margin: 0px !important;
+`;
+
+const ActionsContainer = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
 `;
 
 export { PersonInfo };
