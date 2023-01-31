@@ -1,5 +1,5 @@
 import { IconMoney } from 'assets/icons';
-import { formatNumberToBrlString } from 'utils/formatCurreny';
+import { formatNumberToBrlString } from 'utils/formatCurrency';
 
 import { Tooltip } from 'antd';
 import * as S from './styles';

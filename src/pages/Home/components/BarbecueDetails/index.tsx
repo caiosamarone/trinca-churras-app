@@ -7,7 +7,7 @@ import { PrimaryTitle, SecondaryTitle } from 'components/Title';
 import { IBarbecue, useGlobalContext } from 'contexts/GlobalContext';
 import useMobile from 'hooks/useMobile';
 import { ParticipantForm, PersonInfo } from './components';
-import { formatBRLStringToNumber } from 'utils/formatCurreny';
+import { formatBRLStringToNumber } from 'utils/formatCurrency';
 
 import { Modal as AntModal, Tooltip as AntTooltip, Form as AntForm } from 'antd';
 import * as S from './styles';

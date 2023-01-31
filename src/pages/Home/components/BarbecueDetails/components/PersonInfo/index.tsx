@@ -1,5 +1,5 @@
 import { IParticipant, useGlobalContext } from 'contexts/GlobalContext';
-import { formatNumberToBrlString } from 'utils/formatCurreny';
+import { formatNumberToBrlString } from 'utils/formatCurrency';
 import { SecondaryTitle } from 'components/Title';
 
 import { Tooltip as AntTooltip } from 'antd';
