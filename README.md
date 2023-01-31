@@ -35,7 +35,7 @@ Also, the login will persist in local storage too, just to simulate an authentic
 
 ## Details screen
 
-![App Screenshot](https://i.imgur.com/veZfXAL.png)
+![App Screenshot](https://i.imgur.com/fOIJGhh.png)
 
 
 You can set an participant to 'already paid', by clicking in check icon. By the way, the total amount will not change because it contains the all contribution values given. 
