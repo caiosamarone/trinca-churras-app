@@ -1,7 +1,7 @@
-import Home from 'pages/Home';
-import Login from 'pages/Login';
-import NotFound from 'pages/NotFound';
 import { BrowserRouter, Routes as RouterDOM, Route } from 'react-router-dom';
+
+import { Home, Login, NotFound } from 'pages';
+
 function Routes() {
   return (
     <BrowserRouter>

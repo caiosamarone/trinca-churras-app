@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import { Form as AntForm, Input, DatePicker } from 'antd';
-
 import dayjs from 'dayjs';
 
 import { FormInstance } from 'antd/lib/form/Form';
-import { PrimaryTitle } from './PrimaryTitle';
+
+import { Form as AntForm, Input, DatePicker } from 'antd';
+import * as S from './styles';
+import { PrimaryTitle } from 'components/Title';
 
 interface Props {
   onClose: () => void;
@@ -15,7 +15,7 @@ const BarbecueForm: React.FC<Props> = ({ form }) => {
   return (
     <>
       <PrimaryTitle text="Agendar churrasco" />
-      <Form
+      <S.Form
         name="barbecueForm"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 32 }}
@@ -43,17 +43,9 @@ const BarbecueForm: React.FC<Props> = ({ form }) => {
         <AntForm.Item name="observation">
           <Input placeholder="Observações adicionais" maxLength={100} />
         </AntForm.Item>
-      </Form>
+      </S.Form>
     </>
   );
 };
-
-const Form = styled(AntForm)`
-  min-width: 280px;
-  margin-top: 24px;
-  @media (max-width: 768px) {
-    min-width: unset;
-  }
-`;
 
 export { BarbecueForm };

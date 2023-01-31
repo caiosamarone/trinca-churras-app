@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ModalProps as AntdModalProps, Modal as AntModal } from 'antd';
-import styled from 'styled-components';
+import { ModalProps as AntdModalProps } from 'antd';
+import * as S from './styles';
 
 interface ModalProps extends AntdModalProps {
   formName?: string;
@@ -16,7 +16,7 @@ const DefaultModal: React.FC<ModalProps> = ({
   ...props
 }) => {
   return (
-    <Modal
+    <S.Modal
       closable={closable}
       okText={okText}
       okButtonProps={{
@@ -32,7 +32,7 @@ const DefaultModal: React.FC<ModalProps> = ({
       {...props}
     >
       {children}
-    </Modal>
+    </S.Modal>
   );
 };
 
@@ -41,29 +41,3 @@ DefaultModal.defaultProps = {
 };
 
 export { DefaultModal };
-
-export const Modal = styled(AntModal)`
-  .ant-modal-content {
-    border-radius: 0.5rem;
-    overflow: hidden;
-    padding: 10px;
-  }
-
-  .ant-modal-header {
-    padding: 1.5rem;
-    border: 0;
-
-    .ant-modal-title {
-      font-size: 1.5rem;
-    }
-  }
-
-  .ant-modal-body {
-    padding: 1.5rem 1.5rem 1rem;
-  }
-
-  .ant-modal-footer {
-    padding: 0 1.5rem 1.5rem;
-    border: 0;
-  }
-`;

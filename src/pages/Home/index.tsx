@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
-import styled from 'styled-components';
 import { Form as AntForm } from 'antd';
+import { v4 as uuidv4 } from 'uuid';
+
 import { useGlobalContext } from 'contexts/GlobalContext';
-import Header from 'modules/Header';
+import { Header } from 'modules';
 import { TrincaLogo } from 'assets/icons';
 import { DefaultModal } from 'components/Modal';
-import { toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
-import { AddBarbecueCard, BarbecueCard, BarbecueDetails, BarbecueForm } from 'components';
-import { v4 as uuidv4 } from 'uuid';
+import * as S from './styles';
+import { AddBarbecueCard, BarbecueCard, BarbecueDetails, BarbecueForm } from './components';
 
 const Home: React.FC = () => {
   const { barbecue, setBarbecue } = useGlobalContext();
@@ -70,23 +72,23 @@ const Home: React.FC = () => {
     setAddBarbecueModalVisible(false);
   };
   return (
-    <Wrapper>
+    <S.Wrapper>
       <Header />
-      <ContentWrapper>
+      <S.ContentWrapper>
         {selectedBarbecue.id ? (
           <BarbecueDetails barbecue={selectedBarbecue} onClose={() => setSelectedBarbecue({})} />
         ) : (
-          <CardsWrapper id="wrapper__cards">
+          <S.CardsWrapper id="wrapper__cards">
             {barbecue?.map(b => (
               <BarbecueCard key={b.id} barbecue={b} selectBarbecue={setSelectedBarbecue} />
             ))}
             <AddBarbecueCard handleClick={() => setAddBarbecueModalVisible(true)} />
-          </CardsWrapper>
+          </S.CardsWrapper>
         )}
-      </ContentWrapper>
-      <LogoWrapper>
-        <img src={TrincaLogo} style={{ marginTop: '5rem' }} />
-      </LogoWrapper>
+      </S.ContentWrapper>
+      <S.LogoWrapper>
+        <img src={TrincaLogo} alt="Logo trinca" />
+      </S.LogoWrapper>
       <DefaultModal
         open={addBarbecueModalVisible}
         formName="barbecueForm"
@@ -96,39 +98,8 @@ const Home: React.FC = () => {
       >
         <BarbecueForm onClose={onCloseModal} form={form} />
       </DefaultModal>
-    </Wrapper>
+    </S.Wrapper>
   );
 };
 
-const Wrapper = styled.div`
-  height: 100%;
-  background-color: ${({ theme }) => theme.palette.background.main};
-  padding-bottom: 12px;
-`;
-const ContentWrapper = styled.div`
-  max-width: 588px;
-  margin: 0 auto;
-`;
-
-const CardsWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-top: -40px;
-  padding-bottom: 12px;
-  @media (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-    padding-bottom: 20px;
-  }
-`;
-
-const LogoWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
-
-export default Home;
+export { Home };

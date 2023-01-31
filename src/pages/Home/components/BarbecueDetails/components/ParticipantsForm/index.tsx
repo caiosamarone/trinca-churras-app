@@ -1,10 +1,15 @@
-import styled from 'styled-components';
-import { Form as AntForm, Input, Radio, RadioChangeEvent, Typography } from 'antd';
-
-import { FormInstance } from 'antd/lib/form/Form';
 import { useState } from 'react';
 import { NumericFormat } from 'react-number-format';
-import { PrimaryTitle } from './PrimaryTitle';
+import { FormInstance } from 'antd/lib/form/Form';
+import { PrimaryTitle } from 'components/Title';
+
+import {
+  Form as AntForm,
+  Input as AntInput,
+  Radio as AntRadio,
+  RadioChangeEvent as AntRadioChangeEvent,
+} from 'antd';
+import * as S from './styles';
 
 interface Props {
   onClose: () => void;
@@ -16,7 +21,7 @@ const ParticipantForm: React.FC<Props> = ({ form }) => {
 
   const inputNode = (
     <NumericFormat
-      customInput={Input}
+      customInput={AntInput}
       thousandSeparator="."
       decimalSeparator=","
       decimalScale={2}
@@ -25,7 +30,7 @@ const ParticipantForm: React.FC<Props> = ({ form }) => {
     />
   );
 
-  const onChange = (e: RadioChangeEvent) => {
+  const onChange = (e: AntRadioChangeEvent) => {
     setDrinkValue(e.target.value);
   };
 
@@ -40,7 +45,7 @@ const ParticipantForm: React.FC<Props> = ({ form }) => {
   return (
     <>
       <PrimaryTitle text="Adicionar participante" />
-      <Form
+      <S.Form
         name="participantForm"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 32 }}
@@ -48,15 +53,15 @@ const ParticipantForm: React.FC<Props> = ({ form }) => {
         autoComplete="off"
       >
         <AntForm.Item name="name" rules={[{ required: true, message: 'Insira um nome' }]}>
-          <Input placeholder="Nome" maxLength={30} />
+          <AntInput placeholder="Nome" maxLength={30} />
         </AntForm.Item>
-        <Radio.Group onChange={onChange} value={drinkValue}>
-          <Radio value={1}>Vou levar bebida</Radio>
-          <Radio value={2}>Sem bebida</Radio>
-        </Radio.Group>
-        <Typography.Paragraph style={{ fontSize: '16px', marginTop: '12px', marginBottom: '0px' }}>
+        <AntRadio.Group onChange={onChange} value={drinkValue}>
+          <AntRadio value={1}>Vou levar bebida</AntRadio>
+          <AntRadio value={2}>Sem bebida</AntRadio>
+        </AntRadio.Group>
+        <S.ContributionValue>
           Valor sugerido de contribuição: {handleSuggestedValue()}
-        </Typography.Paragraph>
+        </S.ContributionValue>
         <AntForm.Item
           name="contributionValue"
           rules={[
@@ -66,17 +71,9 @@ const ParticipantForm: React.FC<Props> = ({ form }) => {
         >
           {inputNode}
         </AntForm.Item>
-      </Form>
+      </S.Form>
     </>
   );
 };
-
-const Form = styled(AntForm)`
-  min-width: 280px;
-  margin-top: 24px;
-  @media (max-width: 768px) {
-    min-width: unset;
-  }
-`;
 
 export { ParticipantForm };

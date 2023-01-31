@@ -1,10 +1,10 @@
 import { IParticipant, useGlobalContext } from 'contexts/GlobalContext';
-import styled from 'styled-components';
-
-import { CheckCircleOutlined, DeleteOutlined } from '@ant-design/icons';
-import { Tooltip, Typography } from 'antd';
 import { formatNumberToBrlString } from 'utils/formatCurreny';
-import { SecondaryTitle } from './SecondaryTitle';
+import { SecondaryTitle } from 'components/Title';
+
+import { Tooltip as AntTooltip } from 'antd';
+import { CheckCircleOutlined, DeleteOutlined } from '@ant-design/icons';
+import * as S from './styles';
 
 interface Props extends IParticipant {
   barbecueId: string;
@@ -14,18 +14,18 @@ const PersonInfo: React.FC<Props> = ({ id, name, contributionValue, alreadyPaid,
   const { handleDeleteParticipant, checkParticipantPaid } = useGlobalContext();
 
   return (
-    <ItemsWrapper>
-      <PersonName style={{ textDecoration: alreadyPaid ? 'line-through' : 'unset' }}>
+    <S.ItemsWrapper>
+      <S.PersonName style={{ textDecoration: alreadyPaid ? 'line-through' : 'unset' }}>
         {name}
-      </PersonName>
-      <ActionsContainer>
+      </S.PersonName>
+      <S.ActionsContainer>
         <SecondaryTitle
           text={`${formatNumberToBrlString(contributionValue)}`}
           alreadyPaid={alreadyPaid}
           personName
         />
 
-        <Tooltip
+        <AntTooltip
           title={alreadyPaid ? 'Este participante já pagou' : 'Marcar que participante já pagou'}
         >
           <CheckCircleOutlined
@@ -33,42 +33,19 @@ const PersonInfo: React.FC<Props> = ({ id, name, contributionValue, alreadyPaid,
             onClick={() => checkParticipantPaid(barbecueId, id)}
             style={{ cursor: 'pointer', fontSize: '20px', opacity: alreadyPaid ? 0.5 : 1 }}
           />
-        </Tooltip>
+        </AntTooltip>
 
-        <Tooltip title="Remover Participante">
+        <AntTooltip title="Remover Participante">
           <DeleteOutlined
             style={{ cursor: 'pointer', fontSize: '20px' }}
             onClick={() => {
               handleDeleteParticipant(barbecueId, id);
             }}
           />
-        </Tooltip>
-      </ActionsContainer>
-    </ItemsWrapper>
+        </AntTooltip>
+      </S.ActionsContainer>
+    </S.ItemsWrapper>
   );
 };
-
-const ItemsWrapper = styled.div`
-  display: flex;
-  gap: 8px;
-  border-bottom: 1px solid rgba(229, 194, 49, 0.5);
-  padding: 6px;
-  justify-content: space-between;
-`;
-
-const PersonName = styled(Typography.Paragraph)`
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 240px;
-  font-size: 21px;
-  margin: 0px !important;
-`;
-
-const ActionsContainer = styled.div`
-  display: flex;
-  gap: 12px;
-  align-items: center;
-`;
 
 export { PersonInfo };

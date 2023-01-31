@@ -1,11 +1,11 @@
-import { IBarbecue, useGlobalContext } from 'contexts/GlobalContext';
-import { Card, Typography } from 'antd';
-import styled from 'styled-components';
-
 import { SetStateAction, useState, useEffect, useCallback } from 'react';
-import { PrimaryTitle } from './PrimaryTitle';
-import { ParticipantsInfo } from './ParticipantsInfo';
-import { MoneyInfo } from './MoneyInfo';
+
+import { IBarbecue, useGlobalContext } from 'contexts/GlobalContext';
+
+import { MoneyInfo, ParticipantsInfo } from 'components';
+import { PrimaryTitle } from 'components/Title';
+import * as S from './styles';
+import { Card } from 'antd';
 
 interface BarbecueCardProps {
   barbecue: IBarbecue;
@@ -31,36 +31,20 @@ const BarbecueCard: React.FC<BarbecueCardProps> = ({ barbecue, selectBarbecue })
   }, [barbecue, calculateAmountTotal]);
 
   return (
-    <Card
-      style={{ width: '282px', borderRadius: '2px', height: '192px' }}
+    <S.Card
       hoverable
-      bodyStyle={{ height: '100%', padding: '18px', cursor: 'pointer' }}
+      bodyStyle={{ width: '100%', cursor: 'pointer' }}
       onClick={() => selectBarbecue(barbecue)}
     >
       <PrimaryTitle text={formatted} />
 
-      <BarbecueTitle>{barbecue.title}</BarbecueTitle>
-      <Footer>
+      <S.BarbecueTitle>{barbecue.title}</S.BarbecueTitle>
+      <S.Footer>
         <ParticipantsInfo value={barbecue?.peopleList?.length} />
         <MoneyInfo value={totalAmount || 0} />
-      </Footer>
-    </Card>
+      </S.Footer>
+    </S.Card>
   );
 };
-
-const Footer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2.5rem;
-`;
-
-const BarbecueTitle = styled(Typography.Paragraph)`
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 240px;
-  font-size: 21px;
-  margin: 0px !important;
-`;
 
 export { BarbecueCard };

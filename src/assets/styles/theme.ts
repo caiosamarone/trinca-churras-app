@@ -39,6 +39,7 @@ const theme = {
     },
     background: {
       main: '#FAFAFA',
+      secondary: 'F1F1F1',
     },
     text: {
       primary: colors.black.main,

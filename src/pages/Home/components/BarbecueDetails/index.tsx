@@ -1,21 +1,16 @@
-import { Button, Card, Typography, Form as AntForm, Tooltip, Modal } from 'antd';
 import { useCallback, useEffect, useState, useMemo } from 'react';
-import {
-  MoneyInfo,
-  ParticipantForm,
-  ParticipantsInfo,
-  PersonInfo,
-  PrimaryTitle,
-  SecondaryTitle,
-} from 'components';
-import { IBarbecue, useGlobalContext } from 'contexts/GlobalContext';
-import useMobile from 'hooks/useMobile';
-import styled from 'styled-components';
-import { DefaultModal } from './Modal';
-
-import { formatBRLStringToNumber } from 'utils/formatCurreny';
 import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
+
+import { DefaultModal, MoneyInfo, ParticipantsInfo } from 'components';
+import { PrimaryTitle, SecondaryTitle } from 'components/Title';
+import { IBarbecue, useGlobalContext } from 'contexts/GlobalContext';
+import useMobile from 'hooks/useMobile';
+import { ParticipantForm, PersonInfo } from './components';
+import { formatBRLStringToNumber } from 'utils/formatCurreny';
+
+import { Modal as AntModal, Tooltip as AntTooltip, Form as AntForm } from 'antd';
+import * as S from './styles';
 
 interface BarbecueDetailsProps {
   barbecue: IBarbecue;
@@ -43,6 +38,7 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
       setTotalAmount(value);
     }
   }, [barbecue]);
+
   useEffect(() => {
     setBarbeque(bbqContext.filter(b => b.id === barbequeSelected.id)[0]);
     calculateAmountTotal();
@@ -52,6 +48,7 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
     form.resetFields();
     setAddParticipantModalVisible(false);
   };
+
   const doSendForm = async () => {
     let values: any = null;
     try {
@@ -112,19 +109,20 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
       <div className="container__details">
         <PrimaryTitle text={`${barbecue?.date} `} />
         <p>{isMobile ? '_________________' : ' ______________________________________________'}</p>
-        <PeopleContainer style={{ display: 'flex', flexDirection: 'column' }}>
+        <S.PeopleContainer>
           {barbecue?.peopleList?.map(p => (
             <SecondaryTitle
+              key={p.id}
               text={`${p.name} - R$ ${p.contributionValue}  ${p.alreadyPaid ? '(PAGO)' : ''}`}
             />
           ))}
-        </PeopleContainer>
+        </S.PeopleContainer>
       </div>
     );
   }, [barbecue]);
 
   const info = () => {
-    Modal.info({
+    AntModal.info({
       icon: false,
       title: <PrimaryTitle text={`${barbecue?.title} `} />,
       content: listDetailsMemoized,
@@ -134,41 +132,38 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
   };
 
   return (
-    <Card
-      style={{ width: '100%', borderRadius: '2px', height: '100%', marginTop: '-40px' }}
-      bodyStyle={{ height: '100%', padding: '18px' }}
-    >
-      <BackButton onClick={onClose}>Voltar</BackButton>
+    <S.Card bodyStyle={{ height: '100%', padding: '18px' }}>
+      <S.BackButton onClick={onClose}>Voltar</S.BackButton>
       {isMobile ? (
         <>
           <PrimaryTitle text={barbecue?.date || ''} />
-          <BarbecueTitle id="title__event">{barbecue?.title || ''}</BarbecueTitle>
-          <DetailsMobileInfo>
+          <S.BarbecueTitle>{barbecue?.title || ''}</S.BarbecueTitle>
+          <S.DetailsMobileInfo>
             <ParticipantsInfo value={barbecue?.peopleList?.length} />
             <MoneyInfo value={totalAmount} />
-          </DetailsMobileInfo>
+          </S.DetailsMobileInfo>
         </>
       ) : (
         <>
-          <WrapperHeader>
+          <S.WrapperHeader>
             <PrimaryTitle text={barbecue?.date || ''} />
             <ParticipantsInfo value={barbecue?.peopleList?.length || 0} />
-          </WrapperHeader>
-          <WrapperHeader>
-            <BarbecueTitle id="title__event">{barbecue?.title || ''}</BarbecueTitle>
+          </S.WrapperHeader>
+          <S.WrapperHeader>
+            <S.BarbecueTitle>{barbecue?.title || ''}</S.BarbecueTitle>
             <MoneyInfo value={barbecue?.peopleList?.length === 0 ? 0 : totalAmount} />
-          </WrapperHeader>
+          </S.WrapperHeader>
         </>
       )}
 
-      <DescriptionText> {barbecue?.description}</DescriptionText>
+      <S.DescriptionText> {barbecue?.description}</S.DescriptionText>
       {barbecue?.observation && (
-        <DescriptionText>
+        <S.DescriptionText>
           <b>Obs:</b> {barbecue?.observation}
-        </DescriptionText>
+        </S.DescriptionText>
       )}
       {!!barbecue?.peopleList?.length ? (
-        <PariticpantsWrapper>
+        <S.PariticpantsWrapper>
           {barbecue?.peopleList?.map(person => (
             <PersonInfo
               id={person.id}
@@ -179,25 +174,25 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
               barbecueId={barbecue.id}
             />
           ))}
-        </PariticpantsWrapper>
+        </S.PariticpantsWrapper>
       ) : (
-        <div style={{ marginTop: '32px' }}>
+        <S.ContainerEmptyData>
           <SecondaryTitle text="Nenhum participante foi registrado ainda =( " />
-        </div>
+        </S.ContainerEmptyData>
       )}
 
-      <ButtonContainer>
-        <AddParticipanButton type="primary" onClick={() => setAddParticipantModalVisible(true)}>
+      <S.ButtonContainer>
+        <S.AddParticipanButton type="primary" onClick={() => setAddParticipantModalVisible(true)}>
           Adicionar Participante
-        </AddParticipanButton>
+        </S.AddParticipanButton>
         {!!barbecue?.peopleList?.length && (
-          <Tooltip title="Veja os detalhes do evento. Copie os dados (ctrl c + ctrl v) e cole no whatsapp para compartilhar =)">
-            <AddParticipanButton style={{ maxWidth: '120px' }} type="primary" onClick={info}>
+          <AntTooltip title="Veja os detalhes do evento. Copie os dados (ctrl c + ctrl v) e cole no whatsapp para compartilhar =)">
+            <S.AddParticipanButton style={{ maxWidth: '120px' }} type="primary" onClick={info}>
               Copiar lista
-            </AddParticipanButton>
-          </Tooltip>
+            </S.AddParticipanButton>
+          </AntTooltip>
         )}
-      </ButtonContainer>
+      </S.ButtonContainer>
 
       <DefaultModal
         open={addParticpantModalVisible}
@@ -208,77 +203,8 @@ const BarbecueDetails: React.FC<BarbecueDetailsProps> = ({
       >
         <ParticipantForm onClose={handleCloseModal} form={form} />
       </DefaultModal>
-    </Card>
+    </S.Card>
   );
 };
 
 export { BarbecueDetails };
-
-const WrapperHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const PariticpantsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 2rem;
-`;
-
-const BarbecueTitle = styled(Typography.Title)`
-  font-size: 36px !important;
-  max-width: 390px;
-  margin: 0px !important;
-  @media (max-width: 768px) {
-    max-width: unset;
-  }
-`;
-
-const BackButton = styled(Button)`
-  margin-bottom: 1rem;
-  &:hover {
-    border-color: ${({ theme }) => theme.palette.primary.main} !important;
-    color: ${({ theme }) => theme.palette.text.primary} !important;
-  }
-`;
-
-const AddParticipanButton = styled(Button)`
-  width: 100%;
-  background-color: black;
-  border-radius: 18px;
-  margin-top: 2rem;
-  max-width: 220px;
-  &:hover {
-    background-color: ${({ theme }) => theme.palette.text.primary} !important;
-    border-color: ${({ theme }) => theme.palette.text.white} !important;
-  }
-`;
-
-const DetailsMobileInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-`;
-
-const DescriptionText = styled(Typography.Paragraph)`
-  font-size: 17px;
-  margin: 0px !important;
-`;
-
-const PeopleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 12px;
-  justify-content: flex-end;
-`;
